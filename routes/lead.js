@@ -37,22 +37,6 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error ' + err))
 });
 
-router.route('update/:id').post((req, res) => {
-    Lead.findById(req.params.id)
-        .then(lead => {
-            lead.name = req.body.name;
-            lead.company = req.body.company;
-            lead.domain = req.body.domain;
-            lead.createdBy = req.body.createdBy;
-            lead.conversionStatus = req.body.conversionStatus;
-            lead.broadcastStatus = req.body.broadcastStatus;
-            lead.save()
-                .then(() => { res.json('lead updated!') })
-                .catch(err => res.status(400).json('Error ' + err));
-        })
-        .catch(err => res.status(400).json('Error finding' + err));
-});
-
 router.route('/:id').patch((req, res) => {
     const updateObject  = req.body;
     const id = req.params.id
